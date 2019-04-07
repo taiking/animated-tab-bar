@@ -263,6 +263,10 @@ open class RAMAnimatedTabBarController: UITabBarController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         initializeContainers()
+        
+        self.tabBar.backgroundImage = UIImage()
+        self.tabBar.backgroundColor = .white
+        self.tabBar.shadowImage = UIImage()
     }
 
     fileprivate func initializeContainers() {
@@ -419,14 +423,21 @@ open class RAMAnimatedTabBarController: UITabBarController {
         }
     }
 
+    var selectedTabLeadingConstraint: NSLayoutConstraint?
+    var tabSelectedView: TabSelectedView?
+    
     fileprivate func createViewContainers() -> [String: UIView] {
         
         guard let items = tabBar.items, items.count > 0 else { return [:] }
 
         var containersDict: [String: UIView] = [:]
         
+        var firstViewContainer: UIView!
         for index in 0 ..< items.count {
             let viewContainer = createViewContainer()
+            if index == 0 {
+                firstViewContainer = viewContainer
+            }
             containersDict["container\(index)"] = viewContainer
         }
         
@@ -451,6 +462,41 @@ open class RAMAnimatedTabBarController: UITabBarController {
         }
         view.addConstraints(constranints)
         
+        
+        tabSelectedView = TabSelectedView()
+        tabSelectedView!.translatesAutoresizingMaskIntoConstraints = false
+        tabSelectedView!.isUserInteractionEnabled = false
+        self.view.addSubview(tabSelectedView!)
+        view.addConstraint(NSLayoutConstraint(item: tabSelectedView!,
+                                              attribute: .height,
+                                              relatedBy: .equal,
+                                              toItem: firstViewContainer,
+                                              attribute: .height,
+                                              multiplier: 1,
+                                              constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: tabSelectedView!,
+                                              attribute: .width,
+                                              relatedBy: .equal,
+                                              toItem: firstViewContainer,
+                                              attribute: .height,
+                                              multiplier: 1,
+                                              constant: 0))
+        selectedTabLeadingConstraint = NSLayoutConstraint(item: firstViewContainer,
+                                                          attribute: .centerX,
+                                                          relatedBy: .equal,
+                                                          toItem: tabSelectedView,
+                                                          attribute: .centerX,
+                                                          multiplier: 1,
+                                                          constant: 0)
+        view.addConstraint(selectedTabLeadingConstraint!)
+        view.addConstraint(NSLayoutConstraint(item: firstViewContainer,
+                                              attribute: .centerY,
+                                              relatedBy: .equal,
+                                              toItem: tabSelectedView,
+                                              attribute: .centerY,
+                                              multiplier: 1,
+                                              constant: 0))
+        
         return containersDict
     }
 
@@ -459,6 +505,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
         viewContainer.translatesAutoresizingMaskIntoConstraints = false
         viewContainer.isExclusiveTouch = true
         view.addSubview(viewContainer)
+        view.backgroundColor = .red
 
         // add gesture
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RAMAnimatedTabBarController.tapHandler(_:)))
@@ -512,6 +559,26 @@ open class RAMAnimatedTabBarController: UITabBarController {
         if selectedIndex != currentIndex {
             let animationItem: RAMAnimatedTabBarItem = items[currentIndex]
             animationItem.playAnimation()
+            
+            tabSelectedView?.removeConstraint(selectedTabLeadingConstraint!)
+            selectedTabLeadingConstraint = NSLayoutConstraint(item: containers["container\(4 - currentIndex)"]!,
+                                                              attribute: .centerX,
+                                                              relatedBy: .equal,
+                                                              toItem: tabSelectedView,
+                                                              attribute: .centerX,
+                                                              multiplier: 1,
+                                                              constant: 0)
+            view.addConstraint(selectedTabLeadingConstraint!)
+            
+            UIView.animate(
+                withDuration: TimeInterval(animationItem.animation?.duration ?? 0),
+                delay:0,
+                options: UIView.AnimationOptions.curveEaseOut,
+                animations: {() -> Void in
+                    self.view.layoutIfNeeded()
+            },
+                completion: nil
+            );
 
             let deselectItem = items[selectedIndex]
 
@@ -532,5 +599,32 @@ open class RAMAnimatedTabBarController: UITabBarController {
             }
         }
         delegate?.tabBarController?(self, didSelect: controller)
+    }
+}
+
+final class TabSelectedView: UIView {
+    
+    init() {
+        super.init(frame: .zero)
+        self.backgroundColor = .clear
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        context.setFillColor(UIColor.clear.cgColor)
+        context.setStrokeColor(UIColor.red.cgColor)
+        context.setLineWidth(100)
+        context.move(to: CGPoint(x: rect.maxX / 2, y: rect.maxY))
+        context.addArc(center: .init(x: rect.maxX / 2, y: rect.maxY / 2),
+                       radius: rect.maxX / 2,
+                       startAngle: CGFloat.pi / 2, endAngle: CGFloat.pi * 5 / 2, clockwise: false)
+        context.drawPath(using: CGPathDrawingMode.fillStroke)
+        context.strokePath()
     }
 }

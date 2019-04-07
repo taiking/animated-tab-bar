@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QjJ-1j-Kct">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QjJ-1j-Kct">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cbk-oV-z7H" firstAttribute="centerX" secondItem="UxN-OP-GHb" secondAttribute="centerX" id="1l9-FQ-w0o"/>
                             <constraint firstAttribute="centerY" secondItem="UxN-OP-GHb" secondAttribute="centerY" id="5ae-83-gzq"/>
@@ -70,7 +69,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="AeA-ED-4jL" secondAttribute="centerY" id="Ifi-6x-Ruv"/>
                             <constraint firstItem="8ec-QI-6Cw" firstAttribute="centerX" secondItem="AeA-ED-4jL" secondAttribute="centerX" id="gXX-8c-cGG"/>
@@ -117,7 +116,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="juj-np-Jde" secondAttribute="centerY" id="5B9-09-yru"/>
                             <constraint firstItem="VaI-Rh-DC9" firstAttribute="centerX" secondItem="juj-np-Jde" secondAttribute="centerX" id="JZ0-P4-3th"/>
@@ -198,7 +197,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FKl-OF-gs1" firstAttribute="leading" secondItem="KK9-Py-qqm" secondAttribute="trailing" constant="2" id="IP7-Vx-f8P"/>
                             <constraint firstItem="KK9-Py-qqm" firstAttribute="leading" secondItem="JgG-ft-dcB" secondAttribute="leadingMargin" constant="-20" id="Isz-OD-x14"/>
@@ -251,7 +250,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="oai-od-5ae" firstAttribute="centerX" secondItem="gnW-CR-KSE" secondAttribute="centerX" id="jwX-bj-6Ah"/>
                             <constraint firstAttribute="centerY" secondItem="gnW-CR-KSE" secondAttribute="centerY" id="pMh-vB-55X"/>
@@ -285,7 +284,7 @@
     </scenes>
     <resources>
         <image name="Settings" width="30" height="30"/>
-        <image name="Tools_00028" width="30" height="30"/>
+        <image name="Tools_00028" width="60" height="60"/>
         <image name="drop" width="24" height="24"/>
         <image name="icon_pin" width="30" height="30"/>
         <image name="icon_user" width="30" height="30"/>
